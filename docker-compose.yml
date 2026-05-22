@@ -20,6 +20,10 @@ services:
       - CACHE_DRIVER=redis
       - QUEUE_DRIVER=redis
       - ECHO_HOST_MODE=path
+      - LOKI_URL=http://host.docker.internal:3100
+    volumes:
+      - ./app/Listeners/ForwardToLoki.php:/var/www/html/app/Listeners/ForwardToLoki.php
+      - ./app/Providers/EventServiceProvider.php:/var/www/html/app/Providers/EventServiceProvider.php
     depends_on:
       - redis
 

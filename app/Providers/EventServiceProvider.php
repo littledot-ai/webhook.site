@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\IpThrottled;
+use App\Events\RequestCreated;
 use App\Listeners\BlockIp;
+use App\Listeners\ForwardToLoki;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -16,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         IpThrottled::class => [
             BlockIp::class,
+        ],
+        RequestCreated::class => [
+            ForwardToLoki::class,
         ],
     ];
 
